@@ -11,6 +11,7 @@
 
 ## 使用方法
 
+```ts
 const Component = ()=>{
   //默认初始化将querystring初始化进入qState
   const [qState,setQState] = useQueryState();
@@ -23,3 +24,5 @@ const Component = ()=>{
   
 
 }
+
+```
