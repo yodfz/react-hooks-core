@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { useQuery } from '../useQuery'
+import { useQuery } from '../utils/useQuery'
 
 export interface IUseQueryState {
   [key: string]: any
@@ -42,25 +42,25 @@ const useQueryState = <T extends IUseQueryState>(
         }
       })
       if (isQueryUpdate) {
-        setData((preData) => {
+        setData(() => {
           const $data = {
-            ...preData,
             ...updateData
           }
           mapDataToUrl($data)
           return $data
         })
       }
+  
     },
     [data]
   )
-  if (!data) {
-    // 如果本身data不存在
-    // 则强制更新状态数据
-    setData(queryData as T)
+
+  if (JSON.stringify(queryData) === '{}' && JSON.stringify(data) !== '{}') {
+    setData({} as T)
   } else {
     returnSetData(queryData as T)
   }
+
   return [data, returnSetData]
 }
 
